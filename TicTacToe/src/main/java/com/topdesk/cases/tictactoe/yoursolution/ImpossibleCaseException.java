@@ -7,7 +7,7 @@ package com.topdesk.cases.tictactoe.yoursolution;
 
 /**
  *
- * @author VPM
+ * <p>The behaviour of the code was not defined at certain cases, so I just created this class.</p>
  */
 class ImpossibleCaseException extends RuntimeException{
 

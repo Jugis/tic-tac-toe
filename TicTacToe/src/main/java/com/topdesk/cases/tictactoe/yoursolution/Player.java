@@ -8,8 +8,6 @@ package com.topdesk.cases.tictactoe.yoursolution;
 import com.topdesk.cases.tictactoe.CellLocation;
 import com.topdesk.cases.tictactoe.CellState;
 import com.topdesk.cases.tictactoe.GameBoard;
-import java.util.List;
-
 /**
  *
  * @author VPM
@@ -41,89 +39,41 @@ public class Player {
 
     CellLocation NextMove(GameBoard gameBoard) {
         CellLocation returnValue;
-
         
-        returnValue = new Win().isWinning(gameBoard, this);
+        returnValue = new Win().getNextStep(gameBoard, this);
+        if (returnValue != null) {
+            return returnValue;
+        }        
+        returnValue = new BlockOpponent().getNextStep(gameBoard, this);
         if (returnValue != null) {
             return returnValue;
         }
-        
-        returnValue = new BlockOpponent().blockOpponentFromWinning(gameBoard, this);
-        //returnValue = blockOpponnent(gameBoard, this);
+        returnValue = new Fork().getNextStep(gameBoard, this);
         if (returnValue != null) {
             return returnValue;
         }
-        returnValue = new Fork().fork(gameBoard, this);
+        returnValue = new BlockOpponentFork().getNextStep(gameBoard, this);
         if (returnValue != null) {
             return returnValue;
         }
-        returnValue = BlockAlt(gameBoard);
+        returnValue = new MarkCenter().getNextStep(gameBoard, this);
         if (returnValue != null) {
             return returnValue;
         }
-        returnValue = MarkCenter(gameBoard);
+        returnValue = new MarkOppositeCorner().getNextStep(gameBoard, this);
         if (returnValue != null) {
             return returnValue;
         }
-        returnValue = MarkOppositeCorner(gameBoard);
+        returnValue = new MarkAnEmptyCorner().getNextStep(gameBoard, this);
         if (returnValue != null) {
             return returnValue;
         }
-        returnValue = markAnEmptyCorner(gameBoard);
-        if (returnValue != null) {
-            return returnValue;
-        }
-        returnValue = markLastRemainingCell(gameBoard);
+        returnValue = new MarkLastRemainingCell().getNextStep(gameBoard, this);
         if (returnValue != null) {
             return returnValue;
         }
 
         return null;
-    }
-
-
-
-
-
-    /*
-    private CellLocation blockOpponentFork(GameBoard gameBoard) {
-        return YourGameBoard.BlockOpponentFOrk(gameBoard, playerCellState, opponentCellState);
-    }
-*/
-    public static CellLocation Block(GameBoard gameBoard, CellState state) {
-        CellLocation returnValue = null;
-
-        if (returnValue == null) {
-            returnValue = YourGameBoard.rowHandler(state, gameBoard, YourGameBoard.ROWS);
-        }
-        if (returnValue == null) {
-            returnValue = YourGameBoard.rowHandler(state, gameBoard, YourGameBoard.COLUMNS);
-        }
-        if (returnValue == null) {
-            returnValue = YourGameBoard.rowHandler(state, gameBoard, YourGameBoard.DIAGONALS);
-        }
-
-        return returnValue;
-    }
-
-    private CellLocation BlockAlt(GameBoard gameBoard) {
-        return YourGameBoard.BlockOpponentForkAlt(gameBoard, playerCellState, opponentCellState);
-    }
-
-    private CellLocation MarkCenter(GameBoard gameBoard) {
-        return YourGameBoard.MarkCenter(gameBoard, playerCellState);
-    }
-
-    private CellLocation MarkOppositeCorner(GameBoard gameBoard) {
-        return YourGameBoard.MarkOppositeCorner(gameBoard, playerCellState, opponentCellState);
-    }
-    
-    private CellLocation markAnEmptyCorner(GameBoard gameBoard) {
-        return YourGameBoard.MarkARemainingCorner(gameBoard);
-    }
-    
-    private CellLocation markLastRemainingCell(GameBoard gameBoard) {
-        return YourGameBoard.MarkLastRemainingCell(gameBoard);
     }
 
     public CellState getPlayerCellState() {
@@ -132,7 +82,5 @@ public class Player {
 
     public CellState getOpponentCellState() {
         return opponentCellState;
-    }
-
-    
+    } 
 }

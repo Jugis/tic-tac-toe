@@ -1,0 +1,13 @@
+A couple of notes I would like to add:
+
+The description did not EXPLICITLY mention that X is the one who starts, but based on the tests I made the assumption.
+
+I do realize that there are a lot of static methods, but I wanted to stick to what I learnt and make a method static if it only uses parameters.
+
+I wanted to make the player object in classes such as - Fork, Win, BlockOpponentFork etc.- a field, so the methods in these classes would have to be NOT static, but I decided not to 
+over-engineer it! :)
+
+I also wanted to put Player interface and the classes implementing player int oa different package, but also I decided not to over-engineer it in this case as well, since this package is called
+yoursolution...
+
+lastly I do realize that I use the returnValue local variable "unnecessary", but I do belive the code is much more readable this way.
